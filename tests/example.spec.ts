@@ -26,6 +26,21 @@ test('new title page & website', async ({ page }) => {
   await expect(page).toHaveTitle(/NEVER STOP LEARN/);
 });
 
+test('URL check validation', async ({ page }) => {
+  await page.goto('https://automationstepbystep.com/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/NEVER STOP LEARN/);
+
+  await page.locator('#menu-item-4595').getByRole('link', { name: 'About' }).click();
+
+  await expect(page).toHaveURL(/.*about-me/);
+
+  await page.getByText('Home').click();
+
+  await expect(page).toHaveURL(/.*step/);
+});
+
 //You can use various test hooks such as "test.describe" to declare a group of tests.
 test.describe('navigation', () => {
   test.beforeEach(async ({ page }) => {
