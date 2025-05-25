@@ -53,3 +53,10 @@ test.describe('navigation', () => {
     await expect(page).toHaveURL('https://playwright.dev/');
   });
 });
+
+test('has title crazy', async ({ page }) => {
+  await page.goto('https://automationstepbystep.com/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/NEVER STOP LEARNING/);
+});
